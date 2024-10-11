@@ -5,6 +5,7 @@ const exampleService = require('../services/exampleService');
 
 exports.healthCheck=async(req,res)=>{
     try {
+      console.log('Testing health check')
         res.json({message:"Backend API ruuning"})
     } catch (error) {
         
