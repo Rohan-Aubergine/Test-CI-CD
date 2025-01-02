@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A repository for creating cicd pipeline for node projects",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.js"
@@ -11,11 +12,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.11.2",
+    "@apollo/subgraph": "^2.9.3",
+    "@faker-js/faker": "^9.2.0",
+    "@graphql-tools/schema": "^10.0.14",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "faker": "^6.6.6",
+    "graphql": "^16.9.0",
+    "graphql-scalars": "^1.23.0",
+    "graphql-subscriptions": "^3.0.0",
+    "graphql-tag": "^2.12.6",
+    "graphql-ws": "^5.16.0",
     "mongoose": "^8.7.1",
     "nodemon": "^3.1.7",
-    "winston": "^3.15.0"
+    "winston": "^3.15.0",
+    "ws": "^8.18.0"
   }
 }
