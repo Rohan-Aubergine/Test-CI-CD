@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import config from './config/config.js';
-import mongoose from 'mongoose';
+
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
@@ -111,12 +111,7 @@ app.use('/graphql',
 )
 
 
-mongoose.connect(config.mongo_uri)
-  .then(
-    () => {
-      console.log('Connected to MongoDB')
-    })
-  .catch((error) => console.error('Connection error', error));
+
 
 
 
