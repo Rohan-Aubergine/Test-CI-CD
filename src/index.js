@@ -115,18 +115,6 @@ mongoose.connect(config.mongo_uri)
   .then(
     () => {
       console.log('Connected to MongoDB')
-      // Get a reference to the IPO collection
-      //  const ipoCollection = mongoose.connection.collection('ipo_data');
-
-      // // console.log(ipoCollection)
-
-      // // Watch the collection for changes
-      // const changeStream = ipoCollection.watch();
-
-      // changeStream.on('change',(change)=>{
-      // console.log('Change detected:', change);
-      // })
-
     })
   .catch((error) => console.error('Connection error', error));
 
@@ -136,13 +124,13 @@ app.use('/api/v1', exampleRoutes);
 
 // Start the simple express server
 app.listen(config.port, () => {
-  console.log(`Express Server is running on port ${config.port}`);
+  console.log(`Express Server is running on port ${config.express_port}`);
 });
 
 
 // Start the GQL Server with Web Sockets
 httpServer.listen(4000,()=>{
-  console.log('Graphql server running on port 4000')
-  console.log('Web Socket Server Up on port 4000')
+  console.log(`Graphql server running on port ${config.graphql_port}`)
+  console.log(`Web Socket Server Up on port ${config.graphql_port}`)
 })
 

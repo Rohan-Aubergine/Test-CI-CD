@@ -1,0 +1,26 @@
+name: Code Climate Analysis
+
+on: [push, pull_request]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Code Climate CLI
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > cc-test-reporter
+          chmod +x cc-test-reporter
+          mv cc-test-reporter /usr/local/bin/
+
+      - name: Run Code Climate Test Coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        run: |
+          cc-test-reporter before-build
+          npm install
+          npm test -- --coverage
+          cc-test-reporter after-build --exit-code $?
