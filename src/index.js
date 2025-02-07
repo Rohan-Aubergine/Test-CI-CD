@@ -110,8 +110,14 @@ app.use('/graphql',
   expressMiddleware(apolloServer)
 )
 
-
-
+const connectionString=config.mongo_uri
+console.log('Mongo uri:',connectionString)
+mongoose.connect(config.mongo_uri)
+  .then(
+    () => {
+      console.log('Connected to MongoDB')
+    })
+  .catch((error) => console.error('Connection error', error));
 
 
 
