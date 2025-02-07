@@ -1,15 +1,12 @@
 import express from 'express'
 const router = express.Router();
-
+import { healthCheck } from '../controllers/exampleController.js';
 import {generateIpoGmp} from '../controllers/ipoController.js';
 
 
 // Define your routes
-// router.get('/health',exampleController.healthCheck)
-// router.get('/', exampleController.getExamples);
-// router.post('/', exampleController.createExample);
+router.get('/health',healthCheck)
 router.get('/generate-gmp',generateIpoGmp)
-// router.get('/last-day',ipoController.findHighGmpIposEndingToday)
 
 
 export default router

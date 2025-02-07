@@ -1,6 +1,5 @@
 // Import required libraries
 import { faker } from '@faker-js/faker';
-// const {faker} = require('@faker-js/faker'); // For generating random names and dates
 
 // Function to generate a random date within a range
 function randomDate(start, end) {
