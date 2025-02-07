@@ -123,7 +123,7 @@ mongoose.connect(config.mongo_uri)
 app.use('/api/v1', exampleRoutes);
 
 // Start the simple express server
-app.listen(config.port, () => {
+app.listen(config.express_port, () => {
   console.log(`Express Server is running on port ${config.express_port}`);
 });
 
