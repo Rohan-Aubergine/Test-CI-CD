@@ -76,7 +76,7 @@ threshold = 4
 enabled = true
 
 [smells.function_complexity]
-threshold = 8
+threshold = 5
 enabled = true
 
 [smells.duplication]

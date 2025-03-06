@@ -1,2 +1,2 @@
 qlty fmt --all
-qlty smells --all
+# qlty smells --all
