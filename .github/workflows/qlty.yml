@@ -35,4 +35,6 @@ jobs:
         run: qlty --help
 
       - name: Run Qlty Analysis
-        run: qlty fmt --all && qlty smells --all
+        run: | 
+            qlty fmt --all && qlty smells --all
+            echo "Exit Code: $?"
