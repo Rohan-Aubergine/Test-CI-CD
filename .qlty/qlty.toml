@@ -81,7 +81,15 @@ enabled = true
 
 [smells.duplication]
 enabled = true
-threshold = 30
+nodes_threshold = 75
+
+[smells.identical_code]
+enabled = true
+threshold = 75
+
+[smells.similar_code]
+enabled = true
+threshold = 75
 
 [[source]]
 name = "default"
