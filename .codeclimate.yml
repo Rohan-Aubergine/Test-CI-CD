@@ -42,13 +42,13 @@ checks:
     config:
       threshold: #language-specific defaults. overrides affect all languages.
 
-# plugins:
-#   eslint:
-#     enabled: true
-#     channel: "eslint-6"
-#   rubocop:
-#     enabled: true
-#     channel: "rubocop-0-79"
+plugins:
+  # eslint:
+  #   enabled: true
+  #   channel: "eslint-6"
+  # rubocop:
+  #   enabled: true
+  #   channel: "rubocop-0-79"
 
 exclude_patterns:
 - "config/"
