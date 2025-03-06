@@ -30,8 +30,7 @@ jobs:
           source /home/runner/.profile
 
       - name: Verify Qlty Installation
-        run: qlty --version  # Add this line to verify
-
+        run: qlty --version # Add this line to verify
 
       - name: Run Qlty Analysis
         run: qlty fmt --all && qlty smells --all
