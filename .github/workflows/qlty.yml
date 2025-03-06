@@ -28,11 +28,11 @@ jobs:
         run: |
           curl -fsSL https://qlty.sh/install.sh | sh
 
-      - name: Update Source
-        run: source /home/runner/.profile
+      - name: Add Qlty to PATH
+        run: echo "$HOME/.qlty/bin" >> $GITHUB_PATH
 
       - name: Verify Qlty Installation
-        run: qlty --help # Add this line to verify
+        run: qlty --help
 
       - name: Run Qlty Analysis
         run: qlty fmt --all && qlty smells --all
