@@ -1,0 +1,32 @@
+name: Qlty Code Quality Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  qlty_check:
+    name: Run Qlty Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Qlty CLI
+        run: |
+          curl -fsSL https://qlty.sh/install.sh | sh
+
+      - name: Run Qlty anlayze
+        run: qlty scan
