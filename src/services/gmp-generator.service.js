@@ -3,22 +3,19 @@ import { faker } from '@faker-js/faker';
 
 // Function to generate a random date within a range
 function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
-
 
 // Function to generate IPO data
 export function generateIPOData(count) {
-    const ipoData = [];
-    for (let i = 0; i < count; i++) {
-        const Ipo=generateIpoObject()
-        ipoData.push(Ipo);
-    }
+  const ipoData = [];
+  for (let i = 0; i < count; i++) {
+    const Ipo = generateIpoObject();
+    ipoData.push(Ipo);
+  }
 
-return ipoData
-
+  return ipoData;
 }
-
 
 function generateIpoObject() {
   const today = new Date(); // Current date for comparisons
@@ -39,14 +36,14 @@ function generateIpoObject() {
   let isListed = false;
 
   if (today > listingDate) {
-      status = 'Listed';
-      isListed = true;
+    status = 'Listed';
+    isListed = true;
   } else if (today >= ipoOpenDate && today <= ipoCloseDate) {
-      status = 'Open';
+    status = 'Open';
   } else if (today > ipoCloseDate && today < listingDate) {
-      status = 'Closed';
+    status = 'Closed';
   } else if (today < ipoOpenDate) {
-      status = 'Upcoming';
+    status = 'Upcoming';
   }
 
   // Generate random GMP value (positive or negative)
@@ -55,32 +52,31 @@ function generateIpoObject() {
 
   // Generate price band start and end values
   const priceBandStart = 100 + Math.random() * 50; // Random value between 100 and 150
-  const priceBandEnd = 150 + Math.random() * 50;   // Random value between 150 and 200
+  const priceBandEnd = 150 + Math.random() * 50; // Random value between 150 and 200
 
   // Calculate the estimated listing price and percentage
   const estimatedPrice = (gmpValue + priceBandEnd).toFixed(2);
   const estimatedListingPercent = ((gmpValue / priceBandEnd) * 100).toFixed(2);
 
   return {
-      title: faker.company.name(), // Generate a random company name using faker
-      ipoOpenDate: ipoOpenDate.toISOString(),
-      ipoCloseDate: ipoCloseDate.toISOString(),
-      listingDate: listingDate.toISOString(),
-      priceBandStart: priceBandStart.toFixed(2),
-      priceBandEnd: priceBandEnd.toFixed(2),
-      status,
-      isListed,
-      listingPrice: isListed ? `₹${(100 + Math.random() * 100).toFixed(2)}` : null, // Random listing price
-      greyMarket: {
-          gmpDate: new Date(today.getTime() - Math.floor(Math.random() * 5) * 24 * 60 * 60 * 1000).toISOString(), // Random recent date
-          gmp: `₹${gmpValue.toFixed(2)}`,
-          estimatedListingPrice: `₹${estimatedPrice} (${estimatedListingPercent}%)`,
-          lastUpdated: new Date(today.getTime() - Math.floor(Math.random() * 24) * 60 * 60 * 1000).toISOString(), // Random recent time
-      },
+    title: faker.company.name(), // Generate a random company name using faker
+    ipoOpenDate: ipoOpenDate.toISOString(),
+    ipoCloseDate: ipoCloseDate.toISOString(),
+    listingDate: listingDate.toISOString(),
+    priceBandStart: priceBandStart.toFixed(2),
+    priceBandEnd: priceBandEnd.toFixed(2),
+    status,
+    isListed,
+    listingPrice: isListed ? `₹${(100 + Math.random() * 100).toFixed(2)}` : null, // Random listing price
+    greyMarket: {
+      gmpDate: new Date(
+        today.getTime() - Math.floor(Math.random() * 5) * 24 * 60 * 60 * 1000
+      ).toISOString(), // Random recent date
+      gmp: `₹${gmpValue.toFixed(2)}`,
+      estimatedListingPrice: `₹${estimatedPrice} (${estimatedListingPercent}%)`,
+      lastUpdated: new Date(
+        today.getTime() - Math.floor(Math.random() * 24) * 60 * 60 * 1000
+      ).toISOString() // Random recent time
+    }
   };
 }
-
-
-
-
-
