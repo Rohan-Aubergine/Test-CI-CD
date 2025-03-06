@@ -1,7 +1,7 @@
 name: Deploy Nodejs Application
 
 on:
-  push: 
+  push:
     branches:
       - main
 
@@ -14,12 +14,12 @@ jobs:
       - name: Create .env file
         run: echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
       - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}       
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build docker image
-        run: docker build -t rohanpanjwani/first-node-repository .  
+        run: docker build -t rohanpanjwani/first-node-repository .
       - name: Publish image to docker hub
         run: docker push rohanpanjwani/first-node-repository:latest
-        
+
   deploy:
     needs: build
     runs-on: self-hosted
@@ -27,6 +27,6 @@ jobs:
       - name: Pull image from docker hub
         run: docker pull rohanpanjwani/first-node-repository:latest
       - name: Delete old container
-        run: docker rm -f nodejs-app-container 
+        run: docker rm -f nodejs-app-container
       - name: Run docker container
         run: docker run -d -p 3000:3000 -p 4000:4000 --name nodejs-app-container rohanpanjwani/first-node-repository

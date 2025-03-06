@@ -1,5 +1,5 @@
-import express from 'express'
-import cors from 'cors'
+import express from 'express';
+import cors from 'cors';
 import config from './config/config.js';
 import mongoose from 'mongoose';
 import { WebSocketServer } from 'ws';
@@ -7,12 +7,10 @@ import { useServer } from 'graphql-ws/lib/use/ws';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { createServer } from 'http';
-import exampleRoutes from './routes/exampleRoutes.js'
-import {ApolloServer} from '@apollo/server'
+import exampleRoutes from './routes/exampleRoutes.js';
+import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-import resolvers from "./graphql/resolvers.js";
-
-
+import resolvers from './graphql/resolvers.js';
 
 const typeDefs = `#graphql
 scalar DateTime
@@ -74,52 +72,45 @@ type GreyMarket {
 
 const app = express();
 
-const httpServer= createServer(app);
+const httpServer = createServer(app);
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const wsServer = new WebSocketServer({
-  server:httpServer,
-  path:'/graphql'
-})
+  server: httpServer,
+  path: '/graphql'
+});
 
-const wsServerCleanup=useServer({schema},wsServer)
+const wsServerCleanup = useServer({ schema }, wsServer);
 
-const apolloServer= new ApolloServer({
+const apolloServer = new ApolloServer({
   schema,
-  plugins:[
-    ApolloServerPluginDrainHttpServer({httpServer}),
+  plugins: [
+    ApolloServerPluginDrainHttpServer({ httpServer }),
     {
       async serverWillStart() {
         return {
           async drainServer() {
             await wsServerCleanup.dispose();
-            
           }
-        }
+        };
       }
     }
   ]
-})
+});
 
-await apolloServer.start()
+await apolloServer.start();
 
-app.use('/graphql',
-  cors(),
-  express.json(),
-  expressMiddleware(apolloServer)
-)
+app.use('/graphql', cors(), express.json(), expressMiddleware(apolloServer));
 
-const connectionString=config.mongo_uri
-console.log('Mongo uri:',connectionString)
-mongoose.connect(config.mongo_uri)
-  .then(
-    () => {
-      console.log('Connected to MongoDB')
-    })
+const connectionString = config.mongo_uri;
+console.log('Mongo uri:', connectionString);
+mongoose
+  .connect(config.mongo_uri)
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
   .catch((error) => console.error('Connection error', error));
-
-
 
 app.use('/api/v1', exampleRoutes);
 
@@ -128,10 +119,8 @@ app.listen(config.express_port, () => {
   console.log(`Express Server is running on port ${config.express_port}`);
 });
 
-
 // Start the GQL Server with Web Sockets
-httpServer.listen(4000,()=>{
-  console.log(`Graphql server running on port ${config.graphql_port}`)
-  console.log(`Web Socket Server Up on port ${config.graphql_port}`)
-})
-
+httpServer.listen(4000, () => {
+  console.log(`Graphql server running on port ${config.graphql_port}`);
+  console.log(`Web Socket Server Up on port ${config.graphql_port}`);
+});
