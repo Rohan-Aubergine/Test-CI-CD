@@ -1,1 +1,2 @@
-qlty analyze -all
+qlty fmt --all
+qlty smells --all
