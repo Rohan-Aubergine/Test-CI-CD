@@ -27,10 +27,12 @@ jobs:
       - name: Install Qlty CLI
         run: |
           curl -fsSL https://qlty.sh/install.sh | sh
-          source /home/runner/.profile
 
+      - name: Update Source
+        run:  source /home/runner/.profile
+      
       - name: Verify Qlty Installation
-        run: qlty --version # Add this line to verify
+        run: qlty --help # Add this line to verify
 
       - name: Run Qlty Analysis
         run: qlty fmt --all && qlty smells --all
