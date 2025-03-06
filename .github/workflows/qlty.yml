@@ -29,8 +29,8 @@ jobs:
           curl -fsSL https://qlty.sh/install.sh | sh
 
       - name: Update Source
-        run:  source /home/runner/.profile
-      
+        run: source /home/runner/.profile
+
       - name: Verify Qlty Installation
         run: qlty --help # Add this line to verify
 
