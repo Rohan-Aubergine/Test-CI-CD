@@ -28,5 +28,5 @@ jobs:
         run: |
           curl -fsSL https://qlty.sh/install.sh | sh
 
-      - name: Run Qlty anlayze
-        run: qlty scan
+      - name: Run Qlty Analysis
+        run: qlty fmt --all && qlty smells --all
